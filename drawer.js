@@ -2,7 +2,12 @@ var canvas = document.getElementById("gameCanvas");
 var c2d = canvas.getContext("2d");
 var gridwidth, gridheight;
 
+var clear_canvas = function(){
+    c2d.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 var draw_maze = function(hstart, vstart, hend, vend){
+    c2d = canvas.getContext("2d");
     gridwidth = Math.floor(canvas.width/xnum);
     gridheight = Math.floor(canvas.height/ynum);
     c2d.lineWidth = 3;
@@ -27,6 +32,7 @@ var draw_maze = function(hstart, vstart, hend, vend){
 }
 
 var draw_dots = function(){
+    c2d = canvas.getContext("2d");
     c2d.fillStyle = 'orange';
     c2d.strokeStyle = 'black';
     c2d.lineWidth = 1;
@@ -43,13 +49,16 @@ var draw_dots = function(){
 }
 
 var draw_players = function(){
+    c2d = canvas.getContext("2d");
     c2d.fillStyle = 'yellow';
     c2d.strokeStyle = 'black';
     c2d.lineWidth = 1;
-    for(var i = 0; i<players.length; i++){
+    for(var i = 0; i<players.length; i++){i
         c2d.beginPath();
-        c2d.arc(gridwidth*(2*players[i].x+1)/2, gridheight*(2*players[i].y+1)/2, 10, 0, 2 * Math.PI, false);
+        c2d.arc(players[i].xreal, players[i].yreal, 11, 0, 2 * Math.PI, false);
         c2d.fill();
         c2d.stroke();
     }
+    c2d.beginPath();
+    c2d.stroke();
 }

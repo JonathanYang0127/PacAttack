@@ -30,8 +30,8 @@ var initialize_dots = function(){
 }
 
 var players = Array();
-var create_player = function(x, y){
-    players[players.length] = new Player(x, y);
+var create_player = function(x, y, xreal, yreal, dir){
+    players[players.length] = new Player(x, y, xreal, yreal, dir);
 }
 
 console.log("Hello")
@@ -44,12 +44,29 @@ for (var i = 0; i<xnum+1; i++){
     vgrid[i].fill(false);
     console.log(1);
 }
-console.log(vgrid[1][1])
+console.log(vgrid[1][1]);
 
-var convert_to_index = function(x, y, num){
-    //0 = up, 1 = right, 2 = down 3 = left
-    return x+xnum*y+xnum*ynum*num;
+var is_wall = function(x, y, dir){
+    if((x == 0 && dir == 3 ) || (x == 15 && dir == 1)){
+        return true;
+    }
+    if((y == 0 && dir == 0) || (y == 15 && dir == 2)){
+        return true;
+    }
+    if(dir == 0){
+        return hgrid[x][y] == true;
+    }
+    else if(dir == 1){
+        return vgrid[x+1][y] == true;
+    }
+    else if(dir == 2){
+        return hgrid[x][y+1] == true;
+    }
+    else{
+        return vgrid[x][y] == true;
+    }
 }
+
 var generate_maze = function(hstart, vstart, hend, vend, divider){
     if(divider%2 == 0){
         if(hend-hstart == 1){
