@@ -29,6 +29,11 @@ var initialize_dots = function(){
     }
 }
 
+var players = Array();
+var create_player = function(x, y){
+    players[players.length] = new Player(x, y);
+}
+
 console.log("Hello")
 var hgrid = Array();
 var vgrid = Array();

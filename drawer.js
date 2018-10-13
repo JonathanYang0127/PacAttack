@@ -1,8 +1,10 @@
+var canvas = document.getElementById("gameCanvas");
+var c2d = canvas.getContext("2d");
+var gridwidth, gridheight;
+
 var draw_maze = function(hstart, vstart, hend, vend){
-    var canvas = document.getElementById("gameCanvas");
-    var c2d = canvas.getContext("2d");
-    var gridwidth = Math.floor(canvas.width/xnum);
-    var gridheight = Math.floor(canvas.height/ynum);
+    gridwidth = Math.floor(canvas.width/xnum);
+    gridheight = Math.floor(canvas.height/ynum);
     c2d.lineWidth = 3;
     for(var i = hstart; i<=hend; i++){
         for(var j = vstart; j<vend; j++){
@@ -25,9 +27,29 @@ var draw_maze = function(hstart, vstart, hend, vend){
 }
 
 var draw_dots = function(){
+    c2d.fillStyle = 'orange';
+    c2d.strokeStyle = 'black';
+    c2d.lineWidth = 1;
     for (var i = 0; i<xnum;  i++){
         for(var j = 0; j<ynum; j++){
-            
+            if(dots[i][j].appear == true){
+                c2d.beginPath();
+                c2d.arc(gridwidth*(2*i+1)/2, gridheight*(2*j+1)/2, 5, 0, 2 * Math.PI, false);
+                c2d.fill();
+                c2d.stroke();
+            } 
         }
     } 
+}
+
+var draw_players = function(){
+    c2d.fillStyle = 'yellow';
+    c2d.strokeStyle = 'black';
+    c2d.lineWidth = 1;
+    for(var i = 0; i<players.length; i++){
+        c2d.beginPath();
+        c2d.arc(gridwidth*(2*players[i].x+1)/2, gridheight*(2*players[i].y+1)/2, 10, 0, 2 * Math.PI, false);
+        c2d.fill();
+        c2d.stroke();
+    }
 }

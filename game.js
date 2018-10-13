@@ -5,6 +5,9 @@ var initialize = function(){
     initialize_dots();
     draw_maze(0, 0, 16, 16);
     draw_dots();
+    create_player(0, 0);
+    create_player(xnum-1, ynum-1);
+    draw_players();
 }
 initialize();
 
