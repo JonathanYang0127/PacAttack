@@ -11,22 +11,11 @@ var create_canvas = function(x, y, b){
     }
     var gridwidth = Math.floor(canvas.width/xnum);
     var gridheight = Math.floor(canvas.height/ynum);
-    canvas.width = gridwidth*xnum-buffer;
-    canvas.height = gridheight*ynum-buffer;
+    canvas.width = gridwidth*xnum;
+    canvas.height = gridheight*ynum
     canvas.style = style="border:3px solid #000000;"
     c2d.lineWidth = buffer;
     c2d.beginPath();
-    /*
-    for(var i = 1; i<ynum; i++){
-        c2d.moveTo(gridwidth*i-buffer, 0);
-        c2d.lineTo(gridwidth*i-buffer, canvas.height);
-        c2d.stroke();
-    }
-    for(var i = 1; i<xnum; i++){
-        c2d.moveTo(0, gridwidth*i-buffer);
-        c2d.lineTo(canvas.width, gridwidth*i-buffer, canvas);
-        c2d.stroke();
-    }*/
 }
 
 console.log("Hello")
@@ -81,11 +70,12 @@ var draw_maze = function(hstart, vstart, hend, vend){
     var c2d = canvas.getContext("2d");
     var gridwidth = Math.floor(canvas.width/xnum);
     var gridheight = Math.floor(canvas.height/ynum);
+    c2d.lineWidth = 3;
     for(var i = hstart; i<=hend; i++){
         for(var j = vstart; j<vend; j++){
             if(vgrid[i][j] == true){
-                c2d.moveTo(gridwidth*i-buffer, gridheight*j);
-                c2d.lineTo(gridheight*i-buffer, gridheight*(j+1));
+                c2d.moveTo(gridwidth*i, gridheight*j);
+                c2d.lineTo(gridheight*i, gridheight*(j+1));
                 c2d.stroke();
             }
         }
@@ -93,11 +83,10 @@ var draw_maze = function(hstart, vstart, hend, vend){
     for(var i = hstart; i<hend; i++){
         for(var j = vstart; j<=vend; j++){
             if(hgrid[i][j] == true){
-                c2d.moveTo(gridwidth*i, gridheight*j-buffer);
-                c2d.lineTo(gridheight*(i+1), gridheight*j-buffer);
+                c2d.moveTo(gridwidth*i, gridheight*j);
+                c2d.lineTo(gridheight*(i+1), gridheight*j);
                 c2d.stroke();
             }
         }
     }
-
 }
