@@ -25,7 +25,7 @@ var set_up_keys = function(){
         var nx0 = players[0].x+dir_to_x(players[0].dir);
         var ny0 = players[0].y+dir_to_y(players[0].dir);
         var nx1 = players[1].x+dir_to_x(players[1].dir);
-        var ny1 = players[1].x+dir_to_y(players[1].dir);
+        var ny1 = players[1].y+dir_to_y(players[1].dir);
         if(key == 37 && (!is_wall(nx0, ny0, 3) || players[0].blocked)){
             players[0].rdir = 3;
         }
