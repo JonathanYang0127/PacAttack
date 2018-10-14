@@ -1,3 +1,5 @@
+var dots;
+
 class Dot {
     constructor(x, y){
         this.x = x;
@@ -17,7 +19,8 @@ class Player{
         this.yreal = yreal;
         this.blocked = true;
         this.dir = dir; //0 = up, 1 = right, 2 = down, 3 = left
-        this.rdir = this.dir
+        this.rdir = this.dir; 
+        this.numdots = 0;
     }
 
     update_grid_values(){
@@ -38,6 +41,10 @@ class Player{
         }
         if(!(this.x == orgx && orgy == this.y) || Math.abs(this.dir-this.rdir)%2 == 0){
             this.dir = this.rdir;
+            if(dots[this.x][this.y].appear == true){
+                this.numdots++;
+                dots[this.x][this.y].appear = false
+            }
         }
     }
 

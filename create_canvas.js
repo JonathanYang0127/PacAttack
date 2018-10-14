@@ -1,5 +1,4 @@
 var xnum = 16, ynum = 16, buffer = 3;
-var dots;
 
 var create_canvas = function(x, y, b){
     xnum = x, ynum = y, buffer = b;
@@ -32,6 +31,7 @@ var initialize_dots = function(){
 var players = Array();
 var create_player = function(x, y, xreal, yreal, dir){
     players[players.length] = new Player(x, y, xreal, yreal, dir);
+    dots[x][y].appear = false;
 }
 
 console.log("Hello")
