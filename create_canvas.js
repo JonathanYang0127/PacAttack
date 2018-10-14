@@ -14,7 +14,7 @@ var create_canvas = function(x, y, b){
     var gridheight = Math.floor(canvas.height/ynum);
     canvas.width = gridwidth*xnum;
     canvas.height = gridheight*ynum
-    canvas.style = style="border:3px solid #000000;"
+    canvas.style = "border:3px solid #000000;"
     c2d.lineWidth = buffer;
     c2d.beginPath();
 }

@@ -11,6 +11,25 @@ var initialize = function(){
     draw_players();
 }
 
+var set_up_keys = function(){  
+    document.onkeydown = function(e) {
+        var key = e.keyCode ? e.keyCode : e.which;
+        if(key == 37){
+            players[0].dir = !is_wall(players[0].x, players[0].y, 3) ? 3 : players[0].dir;
+        }
+        else if(key == 38) {
+            players[0].dir = !is_wall(players[0].x, players[0].y, 0) ? 0 : players[0].dir;
+        }
+        else if(key == 39){
+            players[0].dir = !is_wall(players[0].x, players[0].y, 1) ? 1 : players[0].dir;
+        }
+        else if(key == 40) {
+            players[0].dir = !is_wall(players[0].x, players[0].y, 2) ? 2 : players[0].dir;
+        }
+    }
+}
+
+
 var step = function(){
     for(var speed = 0; speed<4; speed++){
         for (var i = 0; i<players.length; i++){
@@ -26,6 +45,7 @@ var step = function(){
 }
 
 var start_game = function(){
+    set_up_keys();
     gameTimer = setInterval(step, 1);
 }
 
