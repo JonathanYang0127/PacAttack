@@ -1,4 +1,33 @@
 var dots;
+var hgrid = Array();
+var vgrid = Array();
+
+var is_wall = function(x, y, dir){
+    if(x<0 || y<0 || x>=xnum || y>=ynum){
+        return true;
+    }
+    if((x == 0 && dir == 3 ) || (x == 15 && dir == 1)){
+        return true;
+    }
+    if((y == 0 && dir == 0) || (y == 15 && dir == 2)){
+        return true;
+    }
+    if(dir == 0){
+        return hgrid[x][y] == true;
+    }
+    else if(dir == 1){
+        return vgrid[x+1][y] == true;
+    }
+    else if(dir == 2){
+        return hgrid[x][y+1] == true;
+    }
+    else{
+        return vgrid[x][y] == true;
+    }
+}
+
+
+
 
 class Dot {
     constructor(x, y){
@@ -22,6 +51,13 @@ class Player{
         this.rdir = this.dir; 
         this.numdots = 0;
     }
+    dir_to_x(dir){
+        return dir == 3 ? -1 : dir == 1 ? 1 : 0;
+    }
+
+    dir_to_y(dir){
+        return dir == 0 ? -1 : dir == 2 ? 1 : 0;
+    }
 
     update_grid_values(){
         var orgx = this.x, orgy = this.y;
@@ -39,11 +75,21 @@ class Player{
         else{
             this.x = Math.floor((this.xreal-gridwidth/2)/gridwidth)+1;
         }
-        if(!(this.x == orgx && orgy == this.y) || Math.abs(this.dir-this.rdir)%2 == 0){
-            this.dir = this.rdir;
+        var nx = this.x+this.dir_to_x(this.dir);
+        var ny = this.y+this.dir_to_y(this.dir);
+        if(!(this.x == orgx && orgy == this.y)){
+            
+            if(!is_wall(this.x, this.y, this.rdir) || this.blocked){
+                this.dir = this.rdir;
+            }
             if(dots[this.x][this.y].appear == true){
                 this.numdots++;
                 dots[this.x][this.y].appear = false
+            }
+        }
+        if(Math.abs(this.dir-this.rdir)%2 == 0){
+            if(!is_wall(this.x, this.y, this.rdir) || this.blocked){
+                this.dir = this.rdir;
             }
         }
     }
